@@ -1,0 +1,270 @@
+@charset "UTF-8";
+
+/* ===============================
+   PC 用
+   =============================== */
+@media (min-width: 1025px) {
+
+  .global-nav-item-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .global-nav-item {
+    display: flex;
+    position: relative;
+  }
+
+  .global-nav-item > a {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #FFF;
+  }
+  .global-nav-item > a:hover {
+    opacity: 0.55;
+  }
+  .global-nav-item > a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1em;
+    background-color: #FFF;
+  }
+
+  .global-nav-item:nth-child(2) > a::before {
+    display: none;
+  }
+
+  .global-nav-item > a::after {
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: #FFF;
+    opacity: 0;
+    transition: 0.2s opacity;
+  }
+
+  .global-nav-item:hover > a::after {
+    opacity: 1;
+  }
+
+  .global-nav-contact {
+    margin-left: 10px;
+    display: flex;
+    position: relative;
+  }
+
+  .global-nav-contact a {
+    background-color: #FFF;
+    padding: 8px 10px;
+    color: #18943b;
+    border-radius: 6px;
+  }
+
+  /* サブメニュー */
+  .global-nav-sub-item-list {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transition: 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .global-nav-item:hover > .global-nav-sub-item-list {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .global-nav-sub-item > a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-top: 1px dotted #ddd;
+    font-size: 15px;
+    text-decoration: none;
+    color: #111;
+  }
+
+  .global-nav-sub-item:first-child > a {
+    border-top: none;
+  }
+
+  .global-nav-sub-item > a:hover {
+    background: hsl(200, 100%, 97%);
+  }
+
+  .global-nav-toggle, .global-nav-button {
+    display: none;
+  }
+}
+
+/* ===============================
+   スマホ 用
+   =============================== */
+@media (max-width: 1024px) {
+
+  .global-nav-item-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #18943b;  /* ← グリーンに変更 */
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 100;
+    pointer-events: none;
+    padding-top: 80px; /* ← ロゴ分の余白 */
+  }
+
+  .global-nav.open .global-nav-item-list {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ロゴエリア（SPメニュー展開時のみ表示） */
+  .global-nav-logo {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 220px;
+  }
+
+  .global-nav-logo img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  /* 順番にフェードイン */
+  .global-nav-item {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.4s ease;
+  }
+
+  .global-nav.open .global-nav-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .global-nav.open .global-nav-item:nth-child(1) { transition-delay: 0.1s; }
+  .global-nav.open .global-nav-item:nth-child(2) { transition-delay: 0.2s; }
+  .global-nav.open .global-nav-item:nth-child(3) { transition-delay: 0.3s; }
+  .global-nav.open .global-nav-item:nth-child(4) { transition-delay: 0.4s; }
+  .global-nav.open .global-nav-item:nth-child(5) { transition-delay: 0.5s; }
+
+  /* メニュー項目を白文字に */
+  .global-nav-item > a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 30px;
+    text-decoration: none;
+    color: #FFF;  /* ← 白文字 */
+    transition: 0.3s;
+  }
+
+  .global-nav-item > a:hover {
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* サブメニュー（アコーディオン） */
+  .global-nav-sub-item-list {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+  }
+
+  .global-nav-sub-item-list.open {
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  .global-nav-sub-item a {
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
+    color: #111;
+    text-decoration: none;
+  }
+/* サブメニュー */
+  .global-nav-sub-item a {
+    padding-left: 50px;
+    color: #FFF; /* ← 白文字 */
+  }
+  /* ハンバーガーボタン */
+  .global-nav-button {
+    position: fixed;
+    top: 12px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    /*background: #FFF;*/
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  .global-nav-button-icon {
+    position: absolute;
+    top: 50%;
+    left: 9px;
+    width: calc(100% - 18px);
+    height: 2px;
+    background: #FFF;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .global-nav-button-icon::before,
+  .global-nav-button-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #FFF;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .global-nav-button-icon::before { top: -8px; }
+  .global-nav-button-icon::after { top: 8px; }
+
+  .global-nav-button.open .global-nav-button-icon {
+    background: transparent;
+  }
+
+  .global-nav-button.open .global-nav-button-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .global-nav-button.open .global-nav-button-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+}

@@ -1,0 +1,58 @@
+body, input, select, textarea {
+  background-color: #FFF;
+  color: #111;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  text-align: justify;
+  line-height: 1.8; }
+  @media screen and (max-width: 480px) {
+    body, input, select, textarea {
+      font-size: 1.4rem; } }
+
+img {
+  width: 100%;
+  height: auto;
+  display: block; }
+
+a {
+  text-decoration: none;
+  /*color: #00A0E4;*/ }
+  a:hover {
+    /*color: #0067E4;*/
+    text-decoration: none;
+    transition: all .5s;
+    opacity: 0.55; }
+
+.spOnly {
+  display: none !important; }
+
+@media screen and (max-width: 768px) {
+  body .pcOnly {
+    display: none !important; }
+  body .spOnly {
+    display: block !important; } }
+
+@media (min-width: 769px) {
+  a[href*="tel:"] {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none; } }
+.hidden {
+  overflow: hidden; }
+
+#pagetop {
+  position: fixed;
+  bottom: 0px;
+  right: 10px; }
+  #pagetop a {
+    text-decoration: none;
+    width: 60px;
+    text-align: center;
+    display: inline-block;
+    background-image: url(../images/page_top.svg);
+    background-repeat: no-repeat;
+    height: 60px;
+    background-position: center top; }
+
+@media screen and (max-width: 768px) {
+  #page-top {
+    /*display: none;*/ } }

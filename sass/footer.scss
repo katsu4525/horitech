@@ -1,0 +1,143 @@
+// Breakpoints.
+$breakpoint-tby: 1100px;
+$breakpoint-tbt: 768px;
+$breakpoint-sp: 480px;
+
+@mixin tby {
+	@media screen and (max-width: ($breakpoint-tby)) {
+		@content;
+	}
+}
+@mixin tbt {
+	@media screen and (max-width: ($breakpoint-tbt)) {
+		@content;
+	}
+}
+@mixin sp {
+	@media screen and (max-width: ($breakpoint-sp)) {
+		@content;
+	}
+}
+/* Footer */
+footer {
+  padding-top: 50px;
+  border-top: 5px solid #18943b;
+	line-height: 1.6em;
+  background-color: #FFF;
+	@include tbt {
+	}
+	@include sp {
+	}
+  .inner{
+    width: 90%;
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include sp {
+      display: block;
+    }
+  }
+  .logo-nav{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .f-contact{
+    .f-log{
+      margin-bottom: 20px;
+      margin-right: 50px;
+      @include sp {
+        width: 240px;
+        margin: 0 auto 20px;
+      }
+    }
+    ul{
+      li{
+        margin-bottom: 3px;
+      }
+    }
+    .f-nav a {
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .circle-icon {
+      width: 16px;
+      height: 16px;
+      border: 1px solid #333;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+    }
+    .f-pv{
+      font-size: 1.2rem;
+    }
+    .tel-form{
+      @include tbt {
+        margin-top: 15px;
+      }
+      @include sp {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .f-form{
+        text-align: center;
+        a{
+          display: inline-block;
+          width: 100%;
+          box-sizing: border-box;
+          padding: 15px 1em;
+          color: #FFF;
+          background-image: linear-gradient(90deg, #18943b, #94d32f);
+          border-radius: 6px;
+        }
+      }
+      .f-tel{
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
+  .bnr-area{
+    padding: 50px 0;
+    border-top: 1px dotted #111;
+    width: 90%;
+    max-width: 1080px;
+    margin: 50px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    @include tbt {
+      margin-top: 30px;
+      padding: 30px 0;
+      display: block;
+    }
+    figure{
+      margin: 0 0 0 30px;
+      @include tbt {
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
+      }
+      img{
+        height: 34px;
+        @include tbt {
+          width: auto;
+        }
+      }
+    }
+  }
+  .copy-r{
+    background-color: #000;
+    font-size: 1.2rem;
+    color: #FFF;
+    width: 100%;
+    padding: 5px 0;
+  }
+}
