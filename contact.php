@@ -69,24 +69,10 @@ $str = make_token();
   </div>
 </header>
 <main> <!-- InstanceBeginEditable name="mainArea" -->
-  <section class="title-area">
+  <section class="title-area-news">
     <h2>お問い合わせ</h2>
   </section>
-  <div class="pan">
-    <a href="./"><img src="images/pan-home.svg" alt="HOME"/></a>
-    <p class="current-page">お問い合わせ</p>
-  </div>
   <section id="contact">
-<!--
-    <div class="inner">
-      <p>株式会社 HoriTechをご利用いただき、誠にありがとうございます。<br>
-        お問い合わせの際は、下記に必要事項をご記入の上、「入力内容を確認する」ボタンをクリックしてください。<br>
-        個人情報の重要性を認識しその保護の徹底を図るため、各種法令を順守しこれに従うことを宣言します。<br>
-      なお当サイトは、個人情報のみならず、法人その他団体のお客様に関する情報についても個人情報と同様に適正に取り扱ってまいります。</p>
-      <p class="tel"><a href="tel:"></a></p>
-        <p class="s-font">受付時間 / 10：00-18：00（土日、祝お休み）</p>
-    </div>
--->
 		<section id="form">
 			<form action="toiawase/design_toiawase.php" method="post" onsubmit="return Validator.submit(this)">
 				<!-- 添付がある場合は下記のタグ
@@ -95,28 +81,18 @@ $str = make_token();
 				<input name="himitsu" type="hidden" id="himitsu" value="<?= $str ?>" />
 
 				<!-- 必須項目 -->
-				<input name="need" type="hidden" id="need" value="お問い合わせ内容 お名前 email email2 電話番号 メッセージ本文" />
+				<input name="need" type="hidden" id="need" value="お名前 email email2 電話番号 お問い合わせ内容" />
 
 				<!-- 修正画面を表示用設置 -->
-        <input type="hidden" name="disp[お問い合わせ内容]" value="select サービスについて 資料請求 パソコン教室 その他">
 				<input type="hidden" name="disp[お名前]" value="text 50">
 				<input type="hidden" name="disp[貴社名]" value="text 50">
 				<input type="hidden" name="disp[email]" value="text 60">
 				<input type="hidden" name="disp[email2]" value="text 60">
 				<input type="hidden" name="disp[電話番号]" value="text 60">
-				<input type="hidden" name="disp[メッセージ本文]" value="textarea 5 55">
-				<input type="hidden" name="disp[個人情報について]" value="check 同意する">
+				<input type="hidden" name="disp[お問い合わせ内容]" value="textarea 5 55">
+				<input type="hidden" name="disp[プライバシーポリシー]" value="check 同意する">
 				<!-- 入力部分 -->
 				<dl class="clearfix">
-          <dt>お問い合わせ内容<span class="must">必須</span></dt>
-          <dd class="selectbox">
-            <select name="内容" id="内容">
-              <option value="サービスについて" onblur="Validator.check(this)">サービスについて</option>
-              <option value="資料請求">資料請求</option>
-              <option value="パソコン教室">パソコン教室</option>
-              <option value="その他">その他</option>
-            </select>
-          </dd>
 					<dt>お名前<span class="must">必須</span></dt>
 					<dd class="boxW100">
 						<input name="お名前" type="text" id="お名前" onblur="Validator.check(this)" />
@@ -125,19 +101,6 @@ $str = make_token();
 					<dd class="boxW100">
 						<input name="貴社名" type="text" id="貴社名" />
 					</dd>
-<!--
-					 <dt>住所</dt>
-				<dd class="boxW100">
-					<div class="h-adr">
-						<span class="p-country-name" style="display:none;">Japan</span>
-						<div class="boxW40">〒<input type="tel" name="郵便番号" class="p-postal-code" maxlength="8" placeholder="例：5420081"></div>
-						<span>※ハイフン(－)なしでご入力ください</span><br>
-						<input name="ご住所" type="text" class="p-region p-locality p-street-address p-extended-address" value="" />
-						<br>
-						<span>※英数字は半角でご入力ください</span>
-					</div> 
-					</dd>
--->
 					<dt>メールアドレス<span class="must">必須</span></dt>
 					<dd class="boxW100">
 						<input name="email" type="email" id="email" onblur="Validator.check(this, 'equal mail', 'email2')" />
@@ -149,20 +112,20 @@ $str = make_token();
 					<dd class="boxW50">
 						<input name="電話番号" type="tel" id="電話番号" onblur="Validator.check(this)" />
 					</dd>
-					<dt>メッセージ本文<span class="must">必須</span></dt>
+					<dt>お問い合わせ内容<span class="must">必須</span></dt>
 					<dd class="boxW100">
-						<textarea name="メッセージ本文" rows="6" id="メッセージ本文" onblur="Validator.check(this)"></textarea>
+						<textarea name="お問い合わせ内容" rows="6" id="お問い合わせ内容" onblur="Validator.check(this)"></textarea>
 					</dd>
-					<dt>個人情報について<span class="must">必須</span></dt>
+					<dt>プライバシーポリシー<span class="must">必須</span></dt>
 					<dd>
 						<label>
-							<input name="個人情報について" type="checkbox" id="個人情報について" value="同意する" onblur="Validator.check(this)">
-							<input name="個人情報について" type="hidden" id="個人情報について" value="同意する">同意する　《<a href="privacy.html">個人情報に関する表記</a>》
+							<input name="プライバシーポリシー" type="checkbox" id="プライバシーポリシー" value="同意する" onblur="Validator.check(this)">
+							<input name="プライバシーポリシー" type="hidden" id="プライバシーポリシー" value="同意する">同意する　《<a href="privacy.html">プライバシーポリシー</a>》
 						</label>
 					</dd>
 				</dl>
 				<p id="image-btn">
-					<input type="submit" value="入力内容を確認する" />
+					<input type="submit" value="内容を確認する" />
 				</p>
 			</form>
 		</section>

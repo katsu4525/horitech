@@ -50,7 +50,11 @@ $breakpoint-sp: 480px;
   }
 }
 .title-area-news{
-  background-image: url("../images/page-title-news.webp");
+  background-image: none;
+  h2{
+    color: #111;
+    text-shadow:none;
+  }
 }
 .title-area-sub{
   margin: 1em auto;

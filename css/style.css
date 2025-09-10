@@ -29,7 +29,10 @@
     text-shadow: 1px 1px 3px #000; }
 
 .title-area-news {
-  background-image: url("../images/page-title-news.webp"); }
+  background-image: none; }
+  .title-area-news h2 {
+    color: #111;
+    text-shadow: none; }
 
 .title-area-sub {
   margin: 1em auto; }
