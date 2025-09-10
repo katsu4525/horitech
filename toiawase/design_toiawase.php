@@ -8,10 +8,10 @@ require(__DIR__ . '/inc_set.php');
 require(__DIR__ . '/inc_postmail.php');
 
 /*********************************************************************
-	Ver7.0 English Version 区切り#
-	25-08-12
+	Ver7.0
+	25-02-28
 
-	添付資料可能標準英語版お問合せ　SMTPおよびmb_send_mail双方可能
+	添付資料可能標準版お問合せ　SMTPおよびmb_send_mail双方可能
 	phpmailer 6.9対応　PHP 7.4～8.4
 	
 	recapcha対応
@@ -21,6 +21,16 @@ require(__DIR__ . '/inc_postmail.php');
 	メール配信をサーバのfromはnoreply@として、
 	迷惑メール対策としてreturn-pathの機能を追加
 	SMTP用のアドレスをreturn-pathとして使用する
+
+証明書エラーが出た場合は下記を設置
+$mailer->SMTPOptions = array(
+    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    )
+);
+
 
  **********************************************************************/
 
@@ -69,7 +79,7 @@ require(__DIR__ . '/inc_postmail.php');
 	設置に関連する変更項目
 -------------------------------------------*/
 //ひな形
-define("HINAGATA", "../../Templates/h_contact_eng.html");
+define("HINAGATA", "../Templates/h_contact.html");
 
 //-----確認画面に関する内容-----
 $I_bg_color = "#F0F0F0";	//テーブルの項目名の背景色
@@ -77,7 +87,7 @@ $V_bg_color = "#FFFFFF";	//テーブルの入力値の背景色
 $E_bg_color = "#EDBBD4";	//テーブルの入力値がエラーの背景色
 $I_char_color = "#000000";	//項目名の文字色
 $V_char_color = "#000000";	//値の文字色
-$E_mail = "Email";	//e-mailの項目名をどのように表示するか
+$E_mail = "メールアドレス";	//e-mailの項目名をどのように表示するか
 
 
 /*----------------------------------------
@@ -92,12 +102,13 @@ if (FILE_NUM > 0) {	//添付あり
 
 del_tmp_file();	//不要ファイルがあれば消す
 if (empty($_POST) && empty($_GET)) {	//不正アクセス
-	$msg = 'There was a problem with the operation.<a href="../contact.php">Return to inquiry</a>';
+	$msg = '操作に問題がありました。<a href="../contact.php">お問い合わせに戻る</a>';
 	disp_contents($msg);
 	exit;
+
 } elseif (!empty($_POST)) {
 	if (!chk_token()) {	//不正アクセス
-		$msg = 'There was a problem with the operation.<a href="../contact.php">Return to inquiry2</a>';
+		$msg = '操作に問題がありました。<a href="../contact.php">お問い合わせに戻る2</a>';
 		disp_contents($msg);
 		exit;
 	}
@@ -107,12 +118,12 @@ if (empty($_POST) && empty($_GET)) {	//不正アクセス
 		$str = "?o=1";
 		// recaptchaV3
 		if (RECAPTCHAV3) {
-			$verifyResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . SECRET_KEY . "&response=" . $_POST["g-recaptcha-response"]);
+			$verifyResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response=" . $_POST["g-recaptcha-response"]);
 			$reCAPTCHA = json_decode($verifyResponse);
 			if ($reCAPTCHA->success) {
 				// echo "認証成功";
 			} else {
-				$msg = 'An error has occurred.<a href="../contact.php">Return to inquiry</a>';
+				$msg = 'エラーが起きました。<a href="../contact.php">お問い合わせに戻る</a>';
 				disp_contents($msg);
 				exit;
 			}
@@ -170,9 +181,8 @@ function next_disp()
 	$notice_array = (!empty($array["notice"])) ? $array["notice"] : array();
 	//必須項目
 	if (!empty($array["need"])) {
-		$n_array = explode("#", $array["need"]);
+		$n_array = explode(" ", $array["need"]);
 	}
-
 	//添付資料の表示があれば
 	for ($i = 1; $i <= FILE_NUM; $i++) {
 		if (!empty($disp_array[F_ATTACH . $i])) {
@@ -196,22 +206,15 @@ function next_disp()
 			}
 		}
 	}
-
-	$r_array = array();
-	foreach ($data_array as $key => $val) {
-		$tmp = str_replace("_", " ", $key);
-		$r_array[$tmp] = $val;
-	}
-
 	//エラーチェック
-	$bg_array = err_chk($r_array, $n_array, $disp_array);
+	$bg_array = err_chk($data_array, $n_array, $disp_array);
 	if (
 		!empty($bg_array["err_msg"]) ||
 		((array_key_exists("mode", $array) !== FALSE) && ($array["mode"] === "edit"))
 	) {	//エラーもしくは編集画面
-		$list .= form_disp($r_array, $disp_array, $notice_array, $n_array, $bg_array);
+		$list .= form_disp($data_array, $disp_array, $notice_array, $n_array, $bg_array);
 	} else {
-		$list .= confirm_disp($r_array, $disp_array, $notice_array, $n_array);
+		$list .= confirm_disp($data_array, $disp_array, $notice_array, $n_array);
 	}
 
 	disp_contents($list);
@@ -236,15 +239,15 @@ function form_disp($data_array, $disp_array, $notice_array, $n_array, $bg_array)
 	$h_data = hidden_data(null, $disp_array, $n_array);
 	//recapcha対応
 	$script = '';
-	$submit = '<input type="submit" value="Confirm">';
+	$submit = '<input type="submit" value="確認する">';
 	$onsubmit =  'return Validator.submit(this)';
 	$recapcha_str = '';
 	if (RECAPTCHAV3) {
 		$script = '<script src="https://www.google.com/recaptcha/api.js"></script>';
-		$recapcha_str = '<input type="hidden" name="g-recaptcha-response" value="' . $_POST["g-recaptcha-response"] . '">';
+		$recapcha_str = '<input type="hidden" name="g-recaptcha-response" value="'.$_POST["g-recaptcha-response"].'">';
 	}
-	if (defined('FILE_NUM') && FILE_NUM > 0) {
-		$script .= file_check();
+	if (defined('FILE_NUM') && FILE_NUM>0) {
+		$script.= file_check();
 	}
 
 	$list = <<<HTML
@@ -258,22 +261,22 @@ HTML;
 	$dl_flg = FALSE;
 	foreach ($disp_array as $key => $val) {
 		$item = $key;
-		$need = (in_array($key, $n_array)) ? "<span class=\"must\">*</span>" : "";
+		$need = (in_array($key, $n_array)) ? "<span class=\"must\">必須</span>" : "";
 		$notice = (empty($notice_array[$key])) ? "" : $notice_array[$key];
 
 		if ($key === 'email') {
-			$item = "E-mail";
+			$item = "メールアドレス";
 		} elseif ($key === 'email2') {
-			$item = "Repeated E-mail";
-			$need = "<span class=\"must\">*</span>";
+			$item = "確認メールアドレス";
+			$need = "<span class=\"must\">必須</span>";
 		}
 
-		$array = explode("#", $val);
+		$array = explode(" ", $val);
 		$data_str = (empty($data_array[$key])) ? "" : $data_array[$key];
 		$str = form_making($array, $data_str, $key, $n_array);
 		//TAGの処理
 		if (strpos($val, 'tag') !== FALSE) {
-			$tmp = explode("#", $val);
+			$tmp = explode(" ", $val);
 			if ($dl_flg) {
 				$list .= "</dl>";
 			} else {
@@ -298,7 +301,7 @@ HTML;
 	$list .= <<<HTML
 </dl>
 <center>
-<p class="formText"> </p>
+<p class="formText">上記の内容でよろしければ「確認する」をクリックしてください。</p>
 <label>
 <input name="himitsu" type="hidden" id="himitsu" value="{$_SESSION["token"]}" />
 {$recapcha_str}
@@ -311,6 +314,7 @@ HTML;
 HTML;
 
 	return $list;
+
 }
 
 
@@ -319,7 +323,6 @@ HTML;
 ---------------------------------------------------*/
 function form_making($array, $data, $key, $n_array)
 {
-
 	//dispの中の各要素、値、キー
 
 	$str = "";
@@ -421,7 +424,7 @@ HTML;
 /*---------------------------------------------------
 	確認画面(エラーなし)
 ---------------------------------------------------*/
-function confirm_disp($d_array, $disp_array, $notice_array, $n_array)
+function confirm_disp($data_array, $disp_array, $notice_array, $n_array)
 {
 
 	global $I_bg_color;
@@ -431,11 +434,6 @@ function confirm_disp($d_array, $disp_array, $notice_array, $n_array)
 	global $Submit;	//submitボタンのID
 
 	global $siteKey;
-
-	foreach ($d_array as $key => $val) {
-	  $tmp = str_replace("_", " ", $key);
-		$data_array[$tmp] = $val;
-	}
 
 	$list = <<<HTML
 <form method="POST" action="{$_SERVER["PHP_SELF"]}" enctype="multipart/form-data">
@@ -458,7 +456,7 @@ HTML;
 			$item = '住所1';
 		}
 
-		$need = (in_array($key, $n_array)) ? "<span class=\"must\">*</span>" : "";
+		$need = (in_array($key, $n_array)) ? "<span class=\"must\">必須</span>" : "";
 
 		if (!empty($data_array[$key]) && is_string($data_array[$key])) {
 			$var .= nl2br($data_array[$key]);
@@ -470,7 +468,7 @@ HTML;
 
 		//TAGの処理
 		if (@strpos($val, 'tag') !== FALSE) {
-			$tmp = @explode("#", $val);
+			$tmp = @explode(" ", $val);
 			if ($dl_flg) {
 				$list .= "</dl>";
 			} else {
@@ -501,17 +499,17 @@ HTML;
 	$list .= <<<HTML
 </dl>
 <center>
-<p class="formText">If the above information is correct, please click "Submit."<br>
-If you wish to make corrections, please click "Edit."</p>
+<p class="formText">上記の内容でよろしければ、「送信する」をクリックしてください。<br>
+修正を行う場合は、「修正する」をクリックしてください。</p>
 <div class="formBtn">
 <form method="POST" action="{$_SERVER["PHP_SELF"]}">
-<input type="submit" value="Edit" class="submitBtn">
+<input type="submit" value="修正する" class="submitBtn">
 <input type="hidden" name="mode" value="edit">
 {$h_data}
 </form>
 
 <form method="POST" action="{$_SERVER["PHP_SELF"]}" id="myForm">
-<input type="submit" value="Submit" id="{$Submit}" class="submitBtn">
+<input type="submit" value="送信する" id="{$Submit}" class="submitBtn">
 {$h_data}
 <input type="hidden" name="mode" value="end">
 </form>
@@ -520,6 +518,7 @@ If you wish to make corrections, please click "Edit."</p>
 HTML;
 
 	return $list;
+
 }
 
 
@@ -530,7 +529,7 @@ function mail_proc($array)
 {
 	//拒否メールはここではじく
 	if (defined('IYAN_MAIL')) {
-		$tmp = explode(",", IYAN_MAIL);
+		$tmp = explode(",",IYAN_MAIL);
 		if (in_array($array["email"], $tmp)) {
 			//処理せずにお問い合わせへ
 			header(("Location: ../"));
@@ -543,17 +542,11 @@ function mail_proc($array)
 	global $Mail_header;
 	global $Mail_fooder;
 
-	$br = "\r\n";
+	$br = "\n";
 	$nitiji = date("Y-m-d H:i:s");
 
-	foreach ($array as $key => $val) {
-		$tmp = str_replace("_", " ", $key);
-		unset($array[$key]);
-		$array[$tmp] = $val;
-	}
-
 	//オーナー、利用者兼用の本体部分
-	$body = "Inquiry date and time：" . $nitiji . $br;
+	$body = "お問い合わせ日時：" . $nitiji . $br;
 
 	foreach ($array["disp"] as $key => $val) {
 		if (
@@ -563,7 +556,7 @@ function mail_proc($array)
 		) {
 			$key2 = $key;
 			if ($key === 'email') {
-				$key2 = 'E-mail';
+				$key2 = 'メールアドレス';
 			}
 			if (!empty($array[$key]) && !is_array($array[$key])) {
 				$body .= $key2 . "：" . str_replace("<br>", ",", $array[$key]) . $br;
@@ -572,9 +565,9 @@ function mail_proc($array)
 				foreach ($array[$key] as $k => $v) {
 					$body .= $v . "　";
 				}
-				$body.= $br;
+				$body .= $br;
 			} else {
-				$body .= $key2 . "：" . $br;
+				$body .= $key2 . "：".$br;
 			}
 		}
 	}
@@ -595,7 +588,7 @@ function mail_proc($array)
 	//gmailにも届くように処理
 	$owner_mail = OWNER_MAIL;
 	$bcc = BCC;
-	/*
+/*
 	$domain = str_replace("www.", "", $_SERVER['HTTP_HOST']);
 	if (strpos(OWNER_MAIL, "@".$domain)===FALSE) {	//ドメインと異なるときはBccに追加
 		$owner_mail = SMTP_MAIL;
@@ -603,7 +596,7 @@ function mail_proc($array)
 	}
 */
 	if (!defined('SMTP_MAIL')) {
-		define('SMTP_MAIL', FROM_MAIL);
+		define('SMTP_MAIL',FROM_MAIL);
 	}
 
 	attach_send_mail($owner_mail, $bcc, CC, $Mail_owner_title, $list, FROM_MAIL, "お客さまより", SMTP_MAIL, FROM_MAIL, $attach);
@@ -644,8 +637,7 @@ function attach_send_mail($to, $bcc, $cc, $subject, $body, $from, $from_name, $r
 ---------------------------------------------------*/
 function smtp_mail($to, $bcc, $cc, $subject, $body, $from, $from_name, $return_path, $reply_to, $attach)
 {
-	mb_language("en");
-	// mb_language("ja");
+	mb_language("ja");
 	mb_internal_encoding(CODE);
 
 	//ソースを全部読み込ませる
@@ -740,7 +732,7 @@ function mysend_mail($to, $bcc, $cc, $subject, $body, $from, $from_name, $return
 	}
 	$common["Reply-To"] = $reply_to;
 
-	/*　下記は迷惑メール対策として返信させない方向で変更
+/*　下記は迷惑メール対策として返信させない方向で変更
 	//gmailにも届くように処理
 	$domain = str_replace("www.", "", $_SERVER['HTTP_HOST']);
 	if (strpos($reply_to, "@" . $domain)) {	//ドメインと異なるときは設定しない
@@ -789,10 +781,10 @@ function mysend_mail($to, $bcc, $cc, $subject, $body, $from, $from_name, $return
 		$spf_param = '-f ' . $from; // 送信元メールアドレスを指定
 
 		//PHP8.0以上でないとヘッダは配列で扱えない
-		if (phpversion() < 8) {
+		if (phpversion()<8) {
 			$headers = null;
-			foreach ($header as $key => $val) {
-				$headers .= $key . ':' . $val . "\n";
+			foreach($header as $key=>$val) {
+				$headers.= $key.':'.$val."\n";
 			}
 			$header = $headers;
 		}
@@ -840,9 +832,9 @@ function file_up($i)
 				$tmpfile = rand_str() . "." . $f_array["extension"];
 			} while (file_exists($tmpfile));
 			copy($_FILES[F_ATTACH . $i]["tmp_name"], UPDIR . $tmpfile);
-			$filename = F_ATTACH . $i;
+			$filename = F_ATTACH .$i;
 			if (defined('FILE_NAME')) {
-				$filename .= '(' . FILE_NAME . $i . ')があります';
+				$filename.= '('.FILE_NAME.$i.')があります';
 			}
 		}
 	}
@@ -873,7 +865,7 @@ function rand_str($nLengthRequired = 8)
 	必須項目のエラーチェック
 	戻り値：エラーのクラスの入った配列およびメッセージ
 ---------------------------------------------------*/
-function err_chk($r_array, $n_array, $v_array)
+function err_chk($array, $n_array, $v_array)
 {
 
 	global $E_bg_color;
@@ -884,17 +876,16 @@ function err_chk($r_array, $n_array, $v_array)
 
 	//初期化
 	foreach ($v_array as $key => $val) {
-		$key = str_replace("_", " ", $key);
 		$bg_array[$key] = $V_bg_color;
 	}
 	foreach ($n_array as $key => $val) {
-		if (@array_key_exists($val, $r_array) === FALSE || empty($r_array[$val])) {
+		if (@array_key_exists($val, $array) === FALSE || empty($array[$val])) {
 			//必須のチェック　ラジオボタン対応
 			$bg_array[$val] = $E_bg_color;
 			$err_msg = 1;
 		}
 		if ($val == "email2") {	//確認用メールアドレスがあれば
-			if ($r_array["email"] !== $r_array["email2"]) {
+			if ($array["email"] !== $array["email2"]) {
 				$bg_array["email2"] = $E_bg_color;
 				$err_msg = 2;
 			}
@@ -903,13 +894,13 @@ function err_chk($r_array, $n_array, $v_array)
 
 	//資料サイズと拡張子のチェック
 	for ($i = 1; $i <= FILE_NUM; $i++) {
-		if (!empty($r_array[F_ATTACH . $i]) && strpos($r_array[F_ATTACH . $i], 'err') !== FALSE) {
+		if (!empty($array[F_ATTACH . $i]) && strpos($array[F_ATTACH . $i], 'err') !== FALSE) {
 			$bg_array[F_ATTACH . $i] = $E_bg_color;
 			$err_msg = 3;
 		}
 	}
 
-	$bg_array["err_msg"] = (!empty($err_msg)) ? "There is an error in the input." : "";
+	$bg_array["err_msg"] = (!empty($err_msg)) ? "入力に誤りがあります。" : "";
 
 	return $bg_array;
 }
@@ -947,13 +938,12 @@ function end_disp()
 {
 
 	$list = <<<HTML
-<center>
-Thank you for contacting us.<br>
-Please check the automated confirmation email you will receive from the system.<br>
-We will reply to you shortly, so please wait for a while.</p>
+<center>このたびは、お問合せいただきありがとうございました。<br>
+システムより自動確認メールがお手元に届きますのでご確認ください。<br>
+おってお返事をさせていただきますので、しばらくおまちください。</p>
 <form>
 		<p id="image-btn" class="topBtn">
-<input type="button" value="Return to TOP page" onclick="document.location = '../';" />
+<input type="button" value="TOPページに戻る" onclick="document.location = '../';" />
 		</p>
 </form>
 </center>
@@ -993,9 +983,6 @@ HTML;
 		}
 	}
 
-
-
-
 	foreach ($disp_array as $key => $val) {
 		$str .= <<<HTML
 			<input type="hidden" name="disp[$key]" value="{$val}">
@@ -1003,12 +990,12 @@ HTML;
 	}
 
 	if (!empty($n_array)) {
-		$tmp = @implode('#', $n_array);
+		$tmp = @implode(' ', $n_array);
 		$str .= <<<HTML
 		<input type="hidden" name="need" value="{$tmp}">
 HTML;
 	}
-	/*
+/*
 	//セッションチェック用
 	$str .= <<<HTML
 <input type="hidden" name="himitsu" value="{$_SESSION["token"]}">
@@ -1089,8 +1076,8 @@ function filter_input_args_array($array)
 	}
 
 	$res = filter_input_array($input, $args);
-
 	return $res;
+
 }
 
 
@@ -1150,6 +1137,7 @@ function chk_token()
 	myses_start();
 
 	$array = $_POST;
+
 	if ((!empty($array["himitsu"]) && !empty($_SESSION["token"])) && ($array["himitsu"] === $_SESSION["token"])) {
 		return TRUE;
 	}
@@ -1185,8 +1173,8 @@ function del_tmp_file()
 function convert_char($array, $han, $zen)
 {
 
-	$han_array = explode("#", $han);
-	$zen_array = explode("#", $zen);
+	$han_array = explode(" ", $han);
+	$zen_array = explode(" ", $zen);
 
 	if (is_array($array) === FALSE) {
 		return;
