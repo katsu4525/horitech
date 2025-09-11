@@ -220,7 +220,7 @@
   /* ハンバーガーボタン */
   .global-nav-button {
     position: fixed;
-    top: 12px;
+    top: 8px;
     right: 10px;
     width: 45px;
     height: 45px;

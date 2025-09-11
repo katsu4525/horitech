@@ -84,11 +84,11 @@ $str = make_token();
 				<input name="need" type="hidden" id="need" value="お名前 email email2 電話番号 お問い合わせ内容" />
 
 				<!-- 修正画面を表示用設置 -->
-				<input type="hidden" name="disp[お名前]" value="text 50">
-				<input type="hidden" name="disp[貴社名]" value="text 50">
-				<input type="hidden" name="disp[email]" value="text 60">
-				<input type="hidden" name="disp[email2]" value="text 60">
-				<input type="hidden" name="disp[電話番号]" value="text 60">
+				<input type="hidden" name="disp[お名前]" value="text 100">
+				<input type="hidden" name="disp[貴社名]" value="text 100">
+				<input type="hidden" name="disp[email]" value="text 100">
+				<input type="hidden" name="disp[email2]" value="text 100">
+				<input type="hidden" name="disp[電話番号]" value="text 100">
 				<input type="hidden" name="disp[お問い合わせ内容]" value="textarea 5 55">
 				<input type="hidden" name="disp[プライバシーポリシー]" value="check 同意する">
 				<!-- 入力部分 -->
@@ -173,9 +173,11 @@ $str = make_token();
       </div>
     </div>
     <div class="bnr-area">
-      <p>グループ会社</p>
-      <figure><a href="" target="_blank"><img src="images/group-1.svg" width="560" height="160" alt="HRホールディングス"/></a></figure>
-      <figure><a href="http://www.horinet.co.jp/" target="_blank"><img src="images/group-2.svg" width="560" height="160" alt="株式会社堀通信"/></a></figure>
+      <p>グループ<br class="spOnly">会社</p>
+      <div>
+        <figure><a href="" target="_blank"><img src="images/group-1.svg" width="560" height="160" alt="HRホールディングス"/></a></figure>
+        <figure><a href="http://www.horinet.co.jp/" target="_blank"><img src="images/group-2.svg" width="560" height="160" alt="株式会社堀通信"/></a></figure>
+      </div>
     </div>
   </section>
   <p class="copy-r text-center">&copy; 2017 Hori Communication Corp All Rights Reserved.</p>

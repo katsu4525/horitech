@@ -14,17 +14,28 @@ header {
       margin: 0 auto; } }
   header #h-box {
     width: 94%;
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 15px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; }
+    @media screen and (max-width: 768px) {
+      header #h-box {
+        padding: 15px 0 10px; } }
     header #h-box h1 {
-      width: 300px; }
+      /*width: 300px;*/ }
       @media screen and (max-width: 768px) {
         header #h-box h1 {
-          width: 220px; } }
+          /*width: 220px;*/ } }
+      header #h-box h1 img {
+        height: 50px; }
+        @media screen and (max-width: 768px) {
+          header #h-box h1 img {
+            height: 40px; } }
+        @media screen and (max-width: 480px) {
+          header #h-box h1 img {
+            height: 36px; } }
 
 /*パンくずリスト*/
 /*

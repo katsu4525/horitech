@@ -1,5 +1,5 @@
 // Breakpoints.
-$breakpoint-tby: 1100px;
+$breakpoint-tby: 1200px;
 $breakpoint-tbt: 768px;
 $breakpoint-sp: 480px;
 
@@ -26,7 +26,7 @@ body, input, select, textarea {
   text-align: justify;
   line-height: 1.8;
   @include sp {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 }
 

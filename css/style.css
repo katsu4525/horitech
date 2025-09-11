@@ -1,32 +1,52 @@
 @charset "UTF-8";
 .inner {
   width: 90%;
-  max-width: 1024px;
+  max-width: 1200px;
+  margin: 0 auto; }
+
+.inner1 {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto; }
+
+.inner2 {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto; }
+
+.inner3 {
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto; }
 
 .title-area, .title-area-news {
   background-image: url("../images/page-title.webp");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center center;
   padding: 60px 0;
   margin-bottom: 10px;
   text-align: center;
   font-weight: 700; }
   @media screen and (max-width: 768px) {
     .title-area, .title-area-news {
-      padding: 50px 0; } }
+      background-image: url("../images/page-title-sp.webp");
+      padding: 25px 0; } }
   @media screen and (max-width: 480px) {
     .title-area, .title-area-news {
-      padding: 40px 0; } }
+      padding: 15px 0; } }
   .title-area h2, .title-area-news h2 {
     font-size: 3.0rem;
     line-height: 1.5em;
-    color: #FFF;
     margin: 0;
     padding: 0;
-    background-image: none;
-    text-shadow: 1px 1px 3px #000; }
+    background-image: none; }
+    @media screen and (max-width: 768px) {
+      .title-area h2, .title-area-news h2 {
+        font-size: 2.6rem; } }
+    @media screen and (max-width: 480px) {
+      .title-area h2, .title-area-news h2 {
+        font-size: 2.4rem; } }
 
 .title-area-news {
   background-image: none; }
@@ -41,12 +61,12 @@
     line-height: 1.5em; }
 
 .pan {
-  width: 1024px;
+  width: 1200px;
   margin: 0 auto 40px;
   display: flex;
   align-items: center;
   font-size: 1.4rem; }
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1200px) {
     .pan {
       width: 94%; } }
   @media screen and (max-width: 768px) {
@@ -66,7 +86,7 @@ h2, h3 {
 h3 {
   font-weight: normal;
   font-size: 2.0rem;
-  margin-bottom: 1.0em;
+  margin-bottom: 0.5em;
   color: #18943b; }
   h3.des {
     font-size: 2.4rem;
@@ -116,27 +136,31 @@ h3 {
     transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
-    font-weight: 700;
-    font-size: 4.6rem;
+    font-weight: 900;
+    font-size: 6.0rem;
     line-height: 1.4em;
-    text-shadow: 0 2px 6px #002B31; }
+    text-shadow: 0 2px 4px #002B31; }
     @media screen and (max-width: 768px) {
       #movie .fv .text-overlay {
-        font-size: 3.0rem; } }
+        font-size: 5.0rem;
+        width: 100%; } }
     @media screen and (max-width: 480px) {
       #movie .fv .text-overlay {
-        font-size: 2.3rem; } }
+        font-size: 4.0rem; } }
 
 .index-text-area {
   width: 100%;
   margin: 0 auto 0;
   bottom: 0;
-  background-image: url("../images/page-title.webp");
-  background-size: 100%;
+  background-image: url("../images/top-title.webp");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   text-align: center;
   padding: 20px 0 20px; }
+  @media screen and (max-width: 768px) {
+    .index-text-area {
+      background-image: url("../images/top-title-sp.webp"); } }
   .index-text-area h2 {
     font-size: 2.6rem; }
     @media screen and (max-width: 768px) {
@@ -193,9 +217,19 @@ h3 {
         border-radius: 30px; }
     #index-news .index-news-list .text, #index-menu .index-news-list .text, #news-list .index-news-list .text {
       font-size: 1.6rem; }
-      #index-news .index-news-list .text a:hover, #index-menu .index-news-list .text a:hover, #news-list .index-news-list .text a:hover {
-        color: #18943b;
-        border-bottom: 1px solid #18943b; }
+      #index-news .index-news-list .text a, #index-menu .index-news-list .text a, #news-list .index-news-list .text a {
+        display: flex;
+        flex-wrap: wrap; }
+        #index-news .index-news-list .text a:hover, #index-menu .index-news-list .text a:hover, #news-list .index-news-list .text a:hover {
+          color: #18943b;
+          border-bottom: 1px solid #18943b; }
+      @media screen and (max-width: 768px) {
+        #index-news .index-news-list .text, #index-menu .index-news-list .text, #news-list .index-news-list .text {
+          width: 100%;
+          display: block; } }
+    #index-news .index-news-list img, #index-menu .index-news-list img, #news-list .index-news-list img {
+      width: 15px;
+      margin-left: 5px; }
   #index-news .news-btn, #index-menu .news-btn, #news-list .news-btn {
     text-align: right;
     /* 右寄せ */
@@ -203,10 +237,9 @@ h3 {
     #index-news .news-btn a, #index-menu .news-btn a, #news-list .news-btn a {
       display: inline-flex;
       align-items: center;
-      color: #228b22;
+      color: #111;
       /* 緑色 */
       text-decoration: none;
-      font-weight: bold;
       position: relative;
       padding-right: 1.2em;
       /* 矢印分の余白 */
@@ -215,8 +248,10 @@ h3 {
         content: "→";
         /* 右側に矢印 */
         margin-left: 0.4em;
-        font-size: 1em;
-        transition: transform 0.3s ease; }
+        font-size: 1.2em;
+        transition: transform 0.3s ease;
+        color: #18943b;
+        font-weight: 700; }
       #index-news .news-btn a:hover::after, #index-menu .news-btn a:hover::after, #news-list .news-btn a:hover::after {
         transform: translateX(4px);
         /* ホバー時に矢印を右に動かす */ }
@@ -251,12 +286,14 @@ h3 {
     flex-wrap: wrap;
     justify-content: space-between; }
     #index-menu .index-menu-box .index-menu-box-info {
+      font-size: 2.0rem;
       width: 30%;
       text-align: center; }
       @media screen and (max-width: 480px) {
         #index-menu .index-menu-box .index-menu-box-info {
           width: 100%;
-          margin-bottom: 30px; } }
+          margin-bottom: 30px;
+          font-size: 1.6rem; } }
       #index-menu .index-menu-box .index-menu-box-info figure {
         margin-bottom: -20px; }
 
@@ -344,6 +381,9 @@ h3 {
 #service .service-box1 {
   margin-bottom: 50px;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   flex-direction: row-reverse; }
   @media screen and (max-width: 768px) {
     #service .service-box1 {
@@ -352,7 +392,7 @@ h3 {
     #service .service-box1 {
       margin-bottom: 30px; } }
   #service .service-box1 .box1-left {
-    width: 60%;
+    width: 45%;
     z-index: 1; }
     @media screen and (max-width: 768px) {
       #service .service-box1 .box1-left {
@@ -365,36 +405,38 @@ h3 {
         #service .service-box1 .box1-left .subTitle {
           font-size: 1.8rem; } }
   #service .service-box1 figure {
-    width: 35%;
-    padding-top: 50px; }
+    width: 50%; }
     @media screen and (max-width: 768px) {
       #service .service-box1 figure {
-        width: 100%;
-        padding-top: 15px;
-        margin-bottom: 15px; } }
+        width: 90%;
+        padding-top: 40px;
+        margin-bottom: 20px; } }
+    @media screen and (max-width: 480px) {
+      #service .service-box1 figure {
+        padding-top: 30px; } }
     #service .service-box1 figure img {
-      filter: drop-shadow(-80px -50px 0px #e9f7ed); }
+      filter: drop-shadow(-100px -50px 0px #e9f7ed); }
       @media screen and (max-width: 768px) {
         #service .service-box1 figure img {
-          filter: drop-shadow(-3vw -3vw 0px #e9f7ed); } }
-#service .btnArea {
+          filter: drop-shadow(-5% -5% 0px #e9f7ed); } }
+#service .btnArea, #service .btnArea1 {
   width: 100%;
   max-width: 760px;
   margin: 0 auto 50px;
   margin-bottom: 50px; }
   @media screen and (max-width: 768px) {
-    #service .btnArea {
+    #service .btnArea, #service .btnArea1 {
       margin-bottom: 40px; } }
   @media screen and (max-width: 480px) {
-    #service .btnArea {
+    #service .btnArea, #service .btnArea1 {
       margin-bottom: 30px; } }
-  #service .btnArea .btn {
+  #service .btnArea .btn, #service .btnArea1 .btn {
     width: 48%;
     margin-bottom: 2%; }
     @media screen and (max-width: 480px) {
-      #service .btnArea .btn {
+      #service .btnArea .btn, #service .btnArea1 .btn {
         width: 49%; } }
-    #service .btnArea .btn a {
+    #service .btnArea .btn a, #service .btnArea1 .btn a {
       width: 100%;
       display: inline-flex;
       align-items: center;
@@ -407,9 +449,9 @@ h3 {
       transition: background 0.3s ease;
       box-sizing: border-box;
       border: 1px solid #18943b; }
-      #service .btnArea .btn a:hover {
+      #service .btnArea .btn a:hover, #service .btnArea1 .btn a:hover {
         background: rgba(18, 123, 47, 0.2); }
-      #service .btnArea .btn a::before {
+      #service .btnArea .btn a::before, #service .btnArea1 .btn a::before {
         content: "";
         display: inline-block;
         margin-right: 8px;
@@ -419,6 +461,17 @@ h3 {
         border-right: 6px solid transparent;
         border-top: 8px solid #18943b;
         /* ← 矢印の色（白） */ }
+@media screen and (max-width: 768px) {
+  #service .btnArea1 {
+    text-align: left; } }
+#service .btnArea1 .btn {
+  width: 48%;
+  margin-bottom: 2%; }
+  @media screen and (max-width: 768px) {
+    #service .btnArea1 .btn {
+      width: 100%; } }
+  #service .btnArea1 .btn a {
+    justify-content: flex-start; }
 #service .service-box2 .box2-container {
   counter-reset: box2-counter;
   /* カウンター初期化 */ }
@@ -430,7 +483,7 @@ h3 {
       margin-bottom: 0; }
     #service .service-box2 .box2-container .box2-in .box2-in-left {
       position: relative;
-      width: 280px;
+      width: 320px;
       background: linear-gradient(to bottom, rgba(24, 148, 59, 0.8), rgba(24, 148, 59, 0.2));
       background-repeat: no-repeat;
       background-size: 80% 150px;
@@ -441,13 +494,14 @@ h3 {
       margin-bottom: 20px; }
       @media screen and (max-width: 768px) {
         #service .service-box2 .box2-container .box2-in .box2-in-left {
-          width: 100%;
+          width: 95%;
           background-size: 80% 50vw; } }
       #service .service-box2 .box2-container .box2-in .box2-in-left .textArea {
-        width: 10em;
+        width: 12em;
         color: #fff;
         position: relative;
-        z-index: 1; }
+        z-index: 1;
+        font-size: 1.8rem; }
         @media screen and (max-width: 768px) {
           #service .service-box2 .box2-container .box2-in .box2-in-left .textArea {
             width: 70%; } }
@@ -457,14 +511,14 @@ h3 {
         box-sizing: border-box;
         margin-top: 10px; }
     #service .service-box2 .box2-container .box2-in .box2-in-right {
-      width: calc(100% - 330px); }
+      width: calc(100% - 360px); }
       @media screen and (max-width: 768px) {
         #service .service-box2 .box2-container .box2-in .box2-in-right {
           width: 100%; } }
       #service .service-box2 .box2-container .box2-in .box2-in-right .title {
         color: #18943b;
         display: flex;
-        align-items: center;
+        /*align-items: center;*/
         font-weight: 700;
         font-size: 1.8rem;
         margin-bottom: 15px; }
@@ -476,7 +530,8 @@ h3 {
           font-size: 0.9em;
           /* 矢印のサイズ調整 */
           color: #18943b;
-          /* テキストと同じ色 */ }
+          /* テキストと同じ色 */
+          margin-top: 3px; }
       #service .service-box2 .box2-container .box2-in .box2-in-right .text {
         margin-bottom: 15px;
         padding-bottom: 15px;
@@ -576,6 +631,10 @@ h3 {
   font-weight: 700;
   line-height: 1.8em;
   padding: 5px 0; }
+  @media screen and (max-width: 480px) {
+    #works h4, #works2 h4 {
+      border-radius: 0;
+      font-size: 2.2rem; } }
 #works .title1, #works2 .title1 {
   font-weight: 700;
   font-size: 2.2rem;
@@ -608,6 +667,8 @@ h3 {
         #works .table-area .souryou table td.text-left, #works2 .table-area .souryou table td.text-left {
           text-align: left;
           padding-left: 1em; }
+        #works .table-area .souryou table td.border-none, #works2 .table-area .souryou table td.border-none {
+          border-bottom: none; }
 #works .works-box2, #works2 .works-box2 {
   align-items: flex-start; }
   #works .works-box2 h5, #works2 .works-box2 h5 {
@@ -623,7 +684,7 @@ h3 {
     @media screen and (max-width: 480px) {
       #works .works-box2 h5, #works2 .works-box2 h5 {
         font-size: 1.6rem;
-        width: 180px;
+        width: 100%;
         margin-bottom: 10px; } }
   #works .works-box2 p, #works2 .works-box2 p {
     width: calc(100% - 170px); }
@@ -676,15 +737,13 @@ h3 {
   border-bottom: 1px solid #18943b; }
   @media screen and (max-width: 768px) {
     #company dl {
-      border-top: none;
-      border-bottom: none;
       margin-bottom: 60px; } }
   @media screen and (max-width: 480px) {
     #company dl {
       margin-bottom: 40px; } }
   #company dl dt {
     width: 12em;
-    padding: 2em 0;
+    padding: 1em 0;
     border-top: 1px dotted #CCC;
     background-color: #e9f7ed;
     text-align: center; }
@@ -692,25 +751,27 @@ h3 {
       border-top: none; }
     @media screen and (max-width: 768px) {
       #company dl dt {
-        width: 100%;
-        padding: 0.5em 0;
-        position: relative;
-        border-top: none; } }
+        width: 10em; } }
+    @media screen and (max-width: 480px) {
+      #company dl dt {
+        width: 8em; } }
   #company dl dd {
     width: calc(100% - 12em);
-    padding: 2em 0 2em 1em;
+    padding: 1em 0 1em 1em;
     border-top: 1px dotted #CCC;
     box-sizing: border-box; }
     #company dl dd:nth-child(2) {
       border-top: none; }
     @media screen and (max-width: 768px) {
       #company dl dd {
-        padding: 0.3em 0 1.5em;
-        width: 100%;
-        border-top: none; } }
+        width: calc(100% - 10em); } }
+    @media screen and (max-width: 480px) {
+      #company dl dd {
+        width: calc(100% - 8em); } }
+#company #access h3 {
+  border-bottom: 1px solid #18943B; }
 #company #access .map {
   width: 100%;
-  border: 1px solid #CCC;
   box-sizing: border-box;
   position: relative;
   z-index: 0;
@@ -741,19 +802,12 @@ h3 {
 
 /*個人情報保護法*/
 #privacy h3 {
+  text-decoration: underline;
+  color: #111;
   font-size: 2.0rem;
-  border-bottom: 1px solid #DDD;
-  color: #18943b;
   margin-bottom: 15px;
   margin-top: 2em;
   position: relative; }
-  #privacy h3::before {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    width: 20%;
-    height: 1px;
-    background: #18943b; }
 #privacy ul {
   margin: 1em 0 0; }
   #privacy ul li {
@@ -808,3 +862,8 @@ h3 {
     @media screen and (max-width: 480px) {
       #news-detail .menu-nav {
         margin: 40px auto 0; } }
+
+@media screen and (max-width: 768px) {
+  .space {
+    padding-left: 5%;
+    padding-right: 5%; } }

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Footer */
 footer {
   padding-top: 50px;
@@ -6,7 +7,7 @@ footer {
   background-color: #FFF; }
   footer .inner {
     width: 90%;
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -31,10 +32,12 @@ footer {
     align-items: center;
     color: #333;
     text-decoration: none;
-    font-size: 14px; }
+    font-size: 1.8rem;
+    line-height: 1.2em;
+    margin-bottom: 10px; }
   footer .f-contact .circle-icon {
-    width: 16px;
-    height: 16px;
+    width: 21px;
+    height: 21px;
     border: 1px solid #333;
     border-radius: 50%;
     background-color: #fff;
@@ -43,7 +46,7 @@ footer {
     justify-content: center;
     margin-right: 5px; }
   footer .f-contact .f-pv {
-    font-size: 1.2rem; }
+    font-size: 1.4rem; }
   @media screen and (max-width: 768px) {
     footer .f-contact .tel-form {
       margin-top: 15px; } }
@@ -54,13 +57,22 @@ footer {
   footer .f-contact .tel-form .f-form {
     text-align: center; }
     footer .f-contact .tel-form .f-form a {
+      font-size: 1.8rem;
+      font-weight: 700;
       display: inline-block;
       width: 100%;
       box-sizing: border-box;
       padding: 15px 1em;
       color: #FFF;
       background-image: linear-gradient(90deg, #18943b, #94d32f);
-      border-radius: 6px; }
+      border-radius: 6px;
+      text-decoration: none;
+      position: relative; }
+      footer .f-contact .tel-form .f-form a::after {
+        content: "　▶";
+        /* 半角スペース + 三角 */
+        font-size: 1.4rem;
+        /* 矢印だけ少し調整しても良い */ }
   footer .f-contact .tel-form .f-tel {
     width: 100%;
     margin-top: 10px; }
@@ -68,31 +80,47 @@ footer {
     padding: 50px 0;
     border-top: 1px dotted #111;
     width: 90%;
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 50px auto 0;
     display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box; }
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 1.8rem; }
     @media screen and (max-width: 768px) {
       footer .bnr-area {
         margin-top: 30px;
         padding: 30px 0;
-        display: block; } }
-    footer .bnr-area figure {
-      margin: 0 0 0 30px; }
+        font-size: 1.6rem;
+        justify-content: space-between; } }
+    @media screen and (max-width: 480px) {
+      footer .bnr-area {
+        font-size: 1.5rem; } }
+    footer .bnr-area div {
+      display: flex;
+      flex-wrap: wrap; }
       @media screen and (max-width: 768px) {
-        footer .bnr-area figure {
-          margin-left: 0;
-          margin-top: 15px;
-          width: 100%; } }
-      footer .bnr-area figure img {
-        height: 34px; }
+        footer .bnr-area div {
+          display: block; } }
+      footer .bnr-area div figure {
+        margin: 0 0 0 30px; }
         @media screen and (max-width: 768px) {
-          footer .bnr-area figure img {
-            width: auto; } }
+          footer .bnr-area div figure {
+            margin-left: 0;
+            margin-top: 15px;
+            width: 100%; } }
+        footer .bnr-area div figure img {
+          height: 50px; }
+          @media screen and (max-width: 768px) {
+            footer .bnr-area div figure img {
+              width: auto;
+              height: 40px; } }
+          @media screen and (max-width: 480px) {
+            footer .bnr-area div figure img {
+              width: auto;
+              height: 34px; } }
   footer .copy-r {
     background-color: #000;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #FFF;
     width: 100%;
     padding: 5px 0; }

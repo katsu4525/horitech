@@ -1,5 +1,5 @@
 // Breakpoints.
-$breakpoint-tby: 1100px;
+$breakpoint-tby: 1200px;
 $breakpoint-tbt: 768px;
 $breakpoint-sp: 480px;
 
@@ -33,16 +33,28 @@ header{
   }
   #h-box{
     width: 94%;
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 15px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    @include tbt {
+      padding: 15px 0 10px;
+    }
     h1{
-      width: 300px;
+      /*width: 300px;*/
       @include tbt {
-        width: 220px;
+        /*width: 220px;*/
+      }
+      img{
+        height: 50px;
+        @include tbt {
+          height: 40px;
+        }
+        @include sp {
+          height: 36px;
+        }
       }
     }
   }

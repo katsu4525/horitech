@@ -1,5 +1,5 @@
 // Breakpoints.
-$breakpoint-tby: 1100px;
+$breakpoint-tby: 1200px;
 $breakpoint-tbt: 768px;
 $breakpoint-sp: 480px;
 
@@ -21,32 +21,52 @@ $breakpoint-sp: 480px;
 
 .inner{
   width: 90%;
-  max-width: 1024px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.inner1{
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.inner2{
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.inner3{
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 .title-area,.title-area-news{
   background-image: url("../images/page-title.webp");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center center;
   padding: 60px 0;
   margin-bottom: 10px;
   text-align: center;
   font-weight: 700;
   @include tbt {
-    padding: 50px 0;
+    background-image: url("../images/page-title-sp.webp");
+    padding: 25px 0;
   }
   @include sp {
-    padding: 40px 0;
+    padding: 15px 0;
   }
   h2{
     font-size: 3.0rem;
     line-height: 1.5em;
-    color: #FFF;
     margin: 0;
     padding: 0;
     background-image: none;
-    text-shadow:1px 1px 3px #000;
+    @include tbt {
+      font-size: 2.6rem;
+    }
+    @include sp {
+      font-size: 2.4rem;
+    }
   }
 }
 .title-area-news{
@@ -64,7 +84,7 @@ $breakpoint-sp: 480px;
   }
 }
 .pan{
-  width: 1024px;
+  width: 1200px;
   margin: 0 auto 40px;
   display: flex;
   align-items: center;
@@ -92,7 +112,7 @@ h2,h3{
 h3{
   font-weight: normal;
   font-size: 2.0rem;
-  margin-bottom: 1.0em;
+  margin-bottom: 0.5em;
   color: #18943b;
   &.des{
     font-size: 2.4rem;
@@ -145,15 +165,16 @@ h3{
       transform: translate(-50%, -50%);
       text-align: center;
       color: #fff;
-      font-weight: 700;
-      font-size: 4.6rem;
+      font-weight: 900;
+      font-size: 6.0rem;
       line-height: 1.4em;
-      text-shadow: 0 2px 6px #002B31;
+      text-shadow: 0 2px 4px #002B31;
       @include tbt {
-        font-size: 3.0rem;
+        font-size: 5.0rem;
+        width: 100%;
       }
       @include sp {
-        font-size: 2.3rem;
+        font-size: 4.0rem;
       }
     }
   }
@@ -162,12 +183,15 @@ h3{
   width: 100%;
   margin: 0 auto 0;
   bottom: 0;
-  background-image: url("../images/page-title.webp");
-  background-size: 100%;
+  background-image: url("../images/top-title.webp");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   text-align: center;
   padding: 20px 0 20px;
+  @include tbt {
+    background-image: url("../images/top-title-sp.webp");
+  }
   h2{
     font-size: 2.6rem;
     @include tbt {
@@ -231,11 +255,21 @@ h3{
     .text{
       font-size: 1.6rem;
       a{
+        display: flex;
+        flex-wrap: wrap;
         &:hover{
           color: #18943b;
           border-bottom: 1px solid #18943b;
         }
       }
+      @include tbt {
+        width: 100%;
+        display: block;
+      }
+    }
+    img{
+      width: 15px;
+      margin-left: 5px;
     }
   }
   .news-btn {
@@ -244,17 +278,18 @@ h3{
     a {
       display: inline-flex;
       align-items: center;
-      color: #228b22;            /* 緑色 */
+      color: #111;            /* 緑色 */
       text-decoration: none;
-      font-weight: bold;
       position: relative;
       padding-right: 1.2em;      /* 矢印分の余白 */
       transition: all 0.3s ease;
       &::after {
         content: "→";               /* 右側に矢印 */
         margin-left: 0.4em;
-        font-size: 1em;
+        font-size: 1.2em;
         transition: transform 0.3s ease;
+        color: #18943b;
+        font-weight: 700;
       }
       &:hover::after {
         transform: translateX(4px); /* ホバー時に矢印を右に動かす */
@@ -295,11 +330,13 @@ h3{
     flex-wrap: wrap;
     justify-content: space-between;
     .index-menu-box-info{
+      font-size: 2.0rem;
       width: 30%;
       text-align: center;
       @include sp {
         width: 100%;
         margin-bottom: 30px;
+        font-size: 1.6rem;
       }
       figure{
         margin-bottom: -20px;
@@ -381,6 +418,9 @@ h3{
   .service-box1{
     margin-bottom: 50px;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     flex-direction: row-reverse;
     @include tbt {
       margin-bottom: 40px;
@@ -389,7 +429,7 @@ h3{
       margin-bottom: 30px;
     }
     .box1-left{
-      width: 60%;
+      width: 45%;
       z-index: 1;
       @include tbt {
         width: 100%;
@@ -404,22 +444,24 @@ h3{
       }
     }
     figure{
-      width: 35%;
-      padding-top: 50px;
+      width: 50%;
       @include tbt {
-        width: 100%;
-        padding-top: 15px;
-        margin-bottom: 15px;
+        width: 90%;
+        padding-top: 40px;
+        margin-bottom: 20px;
+      }
+      @include sp {
+        padding-top: 30px;
       }
       img{
-        filter: drop-shadow(-80px -50px 0px #e9f7ed);
+        filter: drop-shadow(-100px -50px 0px #e9f7ed);
         @include tbt {
-          filter: drop-shadow(-3vw -3vw 0px #e9f7ed);
+          filter: drop-shadow(-5% -5% 0px #e9f7ed);
         }
       }
     }
   }
-  .btnArea{
+  .btnArea,.btnArea1{
     width: 100%;
     max-width: 760px;
     margin: 0 auto 50px;
@@ -465,6 +507,21 @@ h3{
       }
     }
   }
+  .btnArea1{
+    @include tbt {
+      text-align: left;
+    }
+    .btn{
+      width: 48%;
+      margin-bottom: 2%;
+      @include tbt {
+        width: 100%;
+      }
+      a{
+        justify-content: flex-start;
+      }
+    }
+  }
   .service-box2{
     .box2-container {
       counter-reset: box2-counter; /* カウンター初期化 */
@@ -478,7 +535,7 @@ h3{
         }
         .box2-in-left{
           position: relative;
-          width: 280px;
+          width: 320px;
           background: linear-gradient(to bottom, rgba(24,148,59,0.80), rgba(24,148,59,0.20));
           background-repeat: no-repeat;
           background-size: 80% 150px;
@@ -488,14 +545,15 @@ h3{
           overflow: hidden;
           margin-bottom: 20px;
           @include tbt {
-            width: 100%;
+            width: 95%;
             background-size: 80% 50vw;
           }
           .textArea{
-            width: 10em;
+            width: 12em;
             color: #fff;
             position: relative;
             z-index: 1;
+            font-size: 1.8rem;
             @include tbt {
               width: 70%;
             }
@@ -508,14 +566,14 @@ h3{
           }
         }
         .box2-in-right{
-          width: calc(100% - 330px);
+          width: calc(100% - 360px);
           @include tbt {
             width: 100%;
           }
           .title{
             color: #18943b;
             display: flex;
-            align-items: center;
+            /*align-items: center;*/
             font-weight: 700;
             font-size: 1.8rem;
             margin-bottom: 15px;
@@ -524,6 +582,7 @@ h3{
               margin-right: 0.5em; /* テキストとの余白 */
               font-size: 0.9em;     /* 矢印のサイズ調整 */
               color: #18943b;       /* テキストと同じ色 */
+              margin-top: 3px;
             }
           }
           .text{
@@ -636,6 +695,10 @@ h3{
     font-weight: 700;
     line-height: 1.8em;
     padding: 5px 0;
+    @include sp {
+      border-radius: 0;
+      font-size: 2.2rem;
+    }
   }
   .title1{
     font-weight: 700;
@@ -673,6 +736,9 @@ h3{
             text-align: left;
             padding-left: 1em;
           }
+          &.border-none{
+            border-bottom: none;
+          }
         }
       }
     }
@@ -691,7 +757,7 @@ h3{
       }
       @include sp {
         font-size: 1.6rem;
-        width: 180px;
+        width: 100%;
         margin-bottom: 10px;
       }
     }
@@ -756,8 +822,6 @@ h3{
     border-top: 1px solid #18943b;
     border-bottom: 1px solid #18943b;
     @include tbt {
-      border-top: none;
-      border-bottom: none;
       margin-bottom: 60px;
     }
     @include sp {
@@ -765,7 +829,7 @@ h3{
     }
     dt{
       width: 12em;
-      padding: 2em 0;
+      padding: 1em 0;
       border-top:1px dotted #CCC;
       background-color: #e9f7ed;
       text-align: center;
@@ -773,31 +837,34 @@ h3{
         border-top: none;
       }
       @include tbt {
-        width: 100%;
-        padding: 0.5em 0 ;
-        position: relative;
-        border-top:none;
+        width: 10em;
+      }
+      @include sp {
+        width: 8em;
       }
     }
     dd{
       width: calc(100% - 12em);
-      padding: 2em 0 2em 1em;
+      padding: 1em 0 1em 1em;
       border-top: 1px dotted #CCC;
       box-sizing: border-box;
       &:nth-child(2){
         border-top: none;
       }
       @include tbt {
-        padding: 0.3em 0 1.5em;
-        width: 100%;
-        border-top: none;
+        width: calc(100% - 10em);
+      }
+      @include sp {
+        width: calc(100% - 8em);
       }
     }
   }
   #access{
+    h3{
+      border-bottom: 1px solid #18943B;
+    }
     .map{
       width: 100%;
-      border: 1px solid #CCC;
       box-sizing: border-box;
       position: relative;
       z-index: 0;
@@ -835,20 +902,12 @@ h3{
 /*個人情報保護法*/
 #privacy{
   h3{
+    text-decoration: underline;
+    color: #111;
     font-size: 2.0rem;
-    border-bottom: 1px solid #DDD;
-    color: #18943b;
     margin-bottom: 15px;
     margin-top: 2em;
     position: relative;
-    &::before{
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      width: 20%;
-      height: 1px;
-      background: #18943b;
-    }
   }
   ul{
     margin: 1em 0 0;
@@ -917,5 +976,11 @@ h3{
     @include sp {
       margin: 40px auto 0;
     }
+  }
+}
+.space{
+  @include tbt {
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }
