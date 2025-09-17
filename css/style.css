@@ -179,13 +179,16 @@ h3 {
     #index-news, #index-menu, #news-list {
       padding: 40px 0; } }
   #index-news .news-title, #index-menu .news-title, #news-list .news-title {
-    font-size: 2.6rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 3.2rem;
     color: #18943b;
     display: flex;
     align-items: baseline;
     gap: 0.5em;
     /* News と お知らせの間隔 */ }
     #index-news .news-title span, #index-menu .news-title span, #news-list .news-title span {
+      font-family: "Zen Kaku Gothic New", sans-serif;
       font-size: 0.5em;
       /* フォントを小さくする */
       color: #000; }
@@ -350,17 +353,18 @@ h3 {
         transform: translateX(4px);
         /* 矢印を右に動かす */ }
 
-#company, #contact, #privacy, #error, #service, #service2, #service3, #works, #works2, #news-detail, #works1 {
+#company, #privacy, #error, #service, #service2, #service3, #works, #works2, #news-detail, #works1 {
   margin-bottom: 100px; }
   @media screen and (max-width: 768px) {
-    #company, #contact, #privacy, #error, #service, #service2, #service3, #works, #works2, #news-detail, #works1 {
+    #company, #privacy, #error, #service, #service2, #service3, #works, #works2, #news-detail, #works1 {
       margin-bottom: 80px; } }
   @media screen and (max-width: 480px) {
-    #company, #contact, #privacy, #error, #service, #service2, #service3, #works, #works2, #news-detail, #works1 {
+    #company, #privacy, #error, #service, #service2, #service3, #works, #works2, #news-detail, #works1 {
       margin-bottom: 60px; } }
 
 /*事業内容*/
 #service h3 {
+  font-family: "Poppins", sans-serif;
   color: #18943b;
   font-size: 2.2rem;
   display: flex;
@@ -604,6 +608,7 @@ h3 {
 
 /*事例*/
 #works h3, #works2 h3 {
+  font-family: "Poppins", sans-serif;
   color: #18943b;
   font-size: 2.2rem;
   display: flex;
@@ -788,17 +793,6 @@ h3 {
     @media screen and (max-width: 480px) {
       #company #access .map iframe {
         height: 300px; } }
-
-/*お問い合わせ*/
-#contact .tel {
-  font-family: "Roboto", sans-serif;
-  font-size: 3.4rem;
-  line-height: 1.4em;
-  margin-top: 0.6em;
-  font-weight: 700; }
-#contact .s-font {
-  font-size: 1.2rem;
-  line-height: 1.6em; }
 
 /*個人情報保護法*/
 #privacy h3 {
